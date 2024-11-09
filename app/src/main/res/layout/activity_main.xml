@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tac.AI"
+        android:textSize="42sp"
+        android:textColor="#0800FF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Turn"
+        android:textSize="24sp"
+        android:layout_marginBottom="16dp"/>
+
+    <ProgressBar
+        android:id="@+id/thinkingProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn00"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn01"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn02"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn10"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn11"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn12"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+        <!-- Row 3 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn20"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn21"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+            <Button
+                android:backgroundTint="#001498"
+                android:id="@+id/btn22"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="40sp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:backgroundTint="#F40000"
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Game"
+        android:layout_marginTop="32dp"/>
+
+</LinearLayout>
