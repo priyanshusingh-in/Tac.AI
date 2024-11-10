@@ -57,9 +57,9 @@ Feel free to fork the repository and submit pull requests for any improvements.
 Priyanshu Singh
 
 ## Screenshots
-<img src="https://github.com/user-attachments/assets/b7178a16-5cfa-4bf0-8c7e-cae28b0935d2" width="320" height="480"/>
-<img src="https://github.com/user-attachments/assets/587dea4f-1d24-4006-9d38-4eb561f4d764" width="320" height="480"/>
-<img src="https://github.com/user-attachments/assets/45c640ac-ad99-4679-9159-2a1d6a71fe91" width="320" height="480"/>
+<img src="https://github.com/user-attachments/assets/b7178a16-5cfa-4bf0-8c7e-cae28b0935d2" width="280" height="480"/>
+<img src="https://github.com/user-attachments/assets/587dea4f-1d24-4006-9d38-4eb561f4d764" width="280" height="480"/>
+<img src="https://github.com/user-attachments/assets/45c640ac-ad99-4679-9159-2a1d6a71fe91" width="280" height="480"/>
 
 
 
