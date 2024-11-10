@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize sound
+        // Initialize sound function
         initializeSounds()
 
         // Set volume control to media volume
