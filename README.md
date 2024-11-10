@@ -1,6 +1,6 @@
 # Tac.AI
 
-![tacai-app-icon-animated](https://github.com/user-attachments/assets/7303f82e-dd06-4a42-9e90-5668caf259cf)
+<img src="https://github.com/user-attachments/assets/7303f82e-dd06-4a42-9e90-5668caf259cf" width="250" height="250"/>
 
 A modern Android implementation of Tic-tac-toe with an AI opponent, featuring a sleek dark UI theme and timed moves.
 
