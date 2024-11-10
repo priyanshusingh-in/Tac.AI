@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/back"
     android:gravity="center"
     android:padding="16dp">
 
@@ -11,17 +12,33 @@
         android:layout_height="wrap_content"
         android:text="Tac.AI"
         android:textSize="42sp"
-        android:textColor="#0800FF"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Turn"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:layout_marginBottom="16dp"/>
+
+
+
+
+
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time left: 10 s"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+
 
     <ProgressBar
         android:id="@+id/thinkingProgress"
@@ -42,7 +59,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn00"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -50,7 +67,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn01"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -58,7 +75,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn02"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -74,7 +91,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn10"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -82,7 +99,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn11"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -90,7 +107,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn12"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -106,7 +123,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn20"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -114,7 +131,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn21"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -122,7 +139,7 @@
                 android:layout_margin="4dp"/>
 
             <Button
-                android:backgroundTint="#001498"
+                android:backgroundTint="#000000"
                 android:id="@+id/btn22"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -133,12 +150,49 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score Board"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/playerScoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player: 0"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/aiScoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="AI: 0"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+
     <Button
-        android:backgroundTint="#F40000"
+        android:backgroundTint="#26FF00"
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reset Game"
-        android:layout_marginTop="32dp"/>
+        android:textColor="@color/black"
+        android:layout_marginTop="22dp"/>
 
 </LinearLayout>

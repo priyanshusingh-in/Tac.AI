@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.media.MediaPlayer
 import android.media.AudioManager
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -17,9 +18,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var statusText: TextView
     private lateinit var resetButton: Button
     private lateinit var thinkingProgress: ProgressBar
+    private lateinit var playerScoreText: TextView
+    private lateinit var aiScoreText: TextView
+    private lateinit var timerText: TextView  // New TextView for timer display
+
     private var board = Array(3) { Array(3) { "" } }
     private var isPlayerTurn = true
+    private var playerScore = 0
+    private var aiScore = 0
     private val handler = Handler(Looper.getMainLooper())
+    private var playerTimer: CountDownTimer? = null // Timer for the player's turn
 
     // Sound players
     private var buttonClickSound: MediaPlayer? = null
@@ -37,9 +45,13 @@ class MainActivity : AppCompatActivity() {
         // Set volume control to media volume
         volumeControlStream = AudioManager.STREAM_MUSIC
 
+        // Initialize views
         statusText = findViewById(R.id.statusText)
         resetButton = findViewById(R.id.resetButton)
         thinkingProgress = findViewById(R.id.thinkingProgress)
+        playerScoreText = findViewById(R.id.playerScoreText)
+        aiScoreText = findViewById(R.id.aiScoreText)
+        timerText = findViewById(R.id.timerText)  // New TextView for timer display
 
         // Initialize buttons array
         buttons = Array(3) { row ->
@@ -61,17 +73,13 @@ class MainActivity : AppCompatActivity() {
                     if (isPlayerTurn && board[i][j].isEmpty()) {
                         playSound(buttonClickSound)
                         makeMove(i, j, "X")
+                        playerTimer?.cancel()  // Stop timer when player makes a move
                         if (!checkGameEnd()) {
-                            // Disable all buttons during AI turn
                             setButtonsEnabled(false)
-                            // Show thinking progress
                             thinkingProgress.visibility = View.VISIBLE
-                            // Add delay before AI move
                             handler.postDelayed({
                                 makeAIMove()
-                                // Re-enable buttons after AI move
                                 setButtonsEnabled(true)
-                                // Hide thinking progress
                                 thinkingProgress.visibility = View.GONE
                             }, 1000) // 1 second delay
                         }
@@ -84,6 +92,28 @@ class MainActivity : AppCompatActivity() {
             playSound(buttonClickSound)
             resetGame()
         }
+
+        // Start timer on player's turn
+        startPlayerTimer()
+    }
+
+    private fun startPlayerTimer() {
+        playerTimer?.cancel()  // Cancel any existing timer
+        playerTimer = object : CountDownTimer(10000, 1000) {  // 10 seconds countdown
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                timerText.text = "Time left: $secondsLeft s"
+            }
+
+            override fun onFinish() {
+                timerText.text = "Time's up!"
+                if (isPlayerTurn) {
+                    isPlayerTurn = false
+                    makeAIMove()
+                    setButtonsEnabled(true)
+                }
+            }
+        }.start()
     }
 
     private fun setButtonsEnabled(enabled: Boolean) {
@@ -117,17 +147,17 @@ class MainActivity : AppCompatActivity() {
         buttons[row][col].text = symbol
         isPlayerTurn = !isPlayerTurn
         statusText.text = if (isPlayerTurn) "Your Turn" else "AI's Turn"
+        if (isPlayerTurn) startPlayerTimer()  // Restart timer on player's turn
     }
 
     private fun makeAIMove() {
-        var bestMove = findBestMove()
+        val bestMove = findBestMove()
         playSound(aiMoveSound)
         makeMove(bestMove.first, bestMove.second, "O")
         checkGameEnd()
     }
 
     private fun findBestMove(): Pair<Int, Int> {
-        // Check for winning move
         for (i in 0..2) {
             for (j in 0..2) {
                 if (board[i][j].isEmpty()) {
@@ -141,7 +171,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Check for blocking player's winning move
         for (i in 0..2) {
             for (j in 0..2) {
                 if (board[i][j].isEmpty()) {
@@ -155,20 +184,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Try to take center
         if (board[1][1].isEmpty()) {
             return Pair(1, 1)
         }
 
-        // Take any corner
-        val corners = listOf(Pair(0,0), Pair(0,2), Pair(2,0), Pair(2,2))
+        val corners = listOf(Pair(0, 0), Pair(0, 2), Pair(2, 0), Pair(2, 2))
         for (corner in corners) {
             if (board[corner.first][corner.second].isEmpty()) {
                 return corner
             }
         }
 
-        // Take any available spot
         for (i in 0..2) {
             for (j in 0..2) {
                 if (board[i][j].isEmpty()) {
@@ -183,21 +209,29 @@ class MainActivity : AppCompatActivity() {
     private fun checkGameEnd(): Boolean {
         val winner = when {
             checkWinner("X") -> {
+                playerScore++
+                playerScoreText.text = "Player: $playerScore"
                 playSound(winSound)
                 "You win!"
             }
+
             checkWinner("O") -> {
+                aiScore++
+                aiScoreText.text = "AI: $aiScore"
                 playSound(winSound)
                 "AI wins!"
             }
+
             isBoardFull() -> {
                 playSound(drawSound)
                 "It's a draw!"
             }
+
             else -> null
         }
 
         winner?.let {
+            playerTimer?.cancel()  // Stop timer on game end
             showGameEndDialog(it)
             return true
         }
@@ -205,17 +239,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkWinner(symbol: String): Boolean {
-        // Check rows
         for (i in 0..2) {
             if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol) return true
         }
 
-        // Check columns
         for (i in 0..2) {
             if (board[0][i] == symbol && board[1][i] == symbol && board[2][i] == symbol) return true
         }
 
-        // Check diagonals
         if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) return true
         if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol) return true
 
@@ -245,16 +276,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         isPlayerTurn = true
+        playerTimer?.cancel()  // Cancel any running timer
+        startPlayerTimer()  // Start timer for new game
         statusText.text = "Your Turn"
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // Release MediaPlayer resources
-        buttonClickSound?.release()
-        winSound?.release()
-        drawSound?.release()
-        aiMoveSound?.release()
+        timerText.text = "Time left: 10 s"
     }
 }
-
