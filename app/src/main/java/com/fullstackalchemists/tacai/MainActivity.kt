@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                                 makeAIMove()
                                 setButtonsEnabled(true)
                                 thinkingProgress.visibility = View.GONE
-                            }, 1000) // 1 second delay
+                            }, 100) // 0.1 second delay
                         }
                     }
                 }
